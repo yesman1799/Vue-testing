@@ -5,13 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Hello, vue :)</h1>
 
     <div id="app">
+        <!-- <p>{{ filteredBooks }}</p> -->
+        <a :href="url">google link via dynamic link</a>
+
         <h2>I am the template</h2>
-        <p>{{ title }}  -  {{ author }} - {{ age }}</p>
+       
+
+        <button @click="age++">Increase age</button>
+        <button @click="age--">Decrease age</button>
+        <div @click="changeTitle">change book title</div>
+
+        <div v-if="showBooks">
+            <ul>
+                <li v-for="book in books" :class="{ fav: book.isFav}" @click="toggleFav(book)">
+                    <img :src="book.img" :alt="book.title">
+                    <h3>{{ book.title }}</h3>
+                    <p>{{ book.author }}</p>
+                    
+                </li>
+            </ul>
+        </div>
+        
+        <button @click="toggleShowBooks">
+            <span v-if="showBooks">Hide Books</span>
+            <span v-else>Show Books</span>
+        </button>
+        <br>
+        <br>
+
+        <div v-show="showBooks">currently showing books</div>
+
+        <br>
+        <br>
+
+        <div class="box" @mouseover="handleEvents($event, 4)">mouseover</div>
+        <div class="box" @mouseleave="handleEvents">mouseleave</div>
+        <div class="box" @dblclick="handleEvents">dblclick</div>
+        <div class="box" @mousemove="handleMousemove">position - {{x}} {{y}}</div>
+        
     </div>
 
     <script src="app.js"></script>
